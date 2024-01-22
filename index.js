@@ -32,6 +32,10 @@ const productsRoutes = require('./AddProduct/products');
 app.use('/admin', authRoutes)
 app.use('/products', productsRoutes);
 
+app.get('/', (req, res) => {
+  res.send('Welcome to the root path!');
+});
+
 // Add a simple route to test if the server is running
 
 const PORT = process.env.PORT || 3001;
