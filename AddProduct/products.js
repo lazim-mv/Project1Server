@@ -20,6 +20,8 @@ const UsedBike = mongoose.model("UsedBikes", {
   listingAddedDate: Date,
   customerName: String,
   customerNumber: Number,
+  bikeBrand: String,
+  bikeModel: String,
 });
 
 // POST route to save bike data with image upload
@@ -40,8 +42,10 @@ router.post("/admin/api/bikes", upload.single("image"), async (req, res) => {
       purchaseDate: req.body.purchaseDate,
       soldDate: req.body.soldDate,
       listingAddedDate: new Date(),
-      customerName: req.body.customerName, 
+      customerName: req.body.customerName,
       customerNumber: req.body.customerNumber,
+      bikeBrand: req.body.bikeBrand,
+      bikeModel: req.body.bikeModel,
     });
 
     await newBike.save();
@@ -90,6 +94,8 @@ router.put("/admin/api/bikes/:id", upload.single("image"), async (req, res) => {
       soldDate,
       customerName,
       customerNumber,
+      bikeBrand,
+      bikeModel,
     } = req.body;
 
     await UsedBike.findByIdAndUpdate(req.params.id, {
@@ -105,6 +111,8 @@ router.put("/admin/api/bikes/:id", upload.single("image"), async (req, res) => {
       soldDate,
       customerName,
       customerNumber,
+      bikeBrand,
+      bikeModel,
     });
     res.json({ success: true });
   } catch (error) {
